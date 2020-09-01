@@ -1,0 +1,39 @@
+{
+  "entries": {
+    "brew": {
+      "postgresql": {
+        "version": "12.4",
+        "bottle": {
+          "cellar": "/usr/local/Cellar",
+          "prefix": "/usr/local",
+          "files": {
+            "catalina": {
+              "url": "https://homebrew.bintray.com/bottles/postgresql-12.4.catalina.bottle.tar.gz",
+              "sha256": "cf7e64a4a702db6667582d6a8d83107b67d1457a623fbe04426d9702023612fa"
+            },
+            "mojave": {
+              "url": "https://homebrew.bintray.com/bottles/postgresql-12.4.mojave.bottle.tar.gz",
+              "sha256": "199d0fa0c97e376933c8cca82e44503b36f610f7edb2170e6a1e7e7491c82017"
+            },
+            "high_sierra": {
+              "url": "https://homebrew.bintray.com/bottles/postgresql-12.4.high_sierra.bottle.tar.gz",
+              "sha256": "c210ec1143b73616108891c3cefaa31754c5bd5fda0222e2e3266035488a1353"
+            }
+          }
+        }
+      }
+    }
+  },
+  "system": {
+    "macos": {
+      "catalina": {
+        "HOMEBREW_VERSION": "2.4.12-206-g85c0612",
+        "HOMEBREW_PREFIX": "/usr/local",
+        "Homebrew/homebrew-core": "880c7afb21824f1b3f26d973804ee510881dd7af",
+        "CLT": "1103.0.32.59",
+        "Xcode": "11.6",
+        "macOS": "10.15.5"
+      }
+    }
+  }
+}

@@ -32,6 +32,14 @@ Use [`heroku-cli`](https://devcenter.heroku.com/articles/heroku-cli):
 heroku local -f Procfile.dev
 ```
 
+### Development Seeds
+
+Seed the database by running:
+
+```sh
+rake dev_seed
+```
+
 ## Testing
 
 Tests are written with [RSpec](https://rspec.info/).

@@ -1,8 +1,21 @@
 ---
 en:
+  employees:
+    index:
+      title: Employee Portal
+      welcome: Welcome, %{name}
+  helpers:
+    label:
+      session:
+        access_code: Enter your access code
+    submit:
+      session:
+        submit: Sign in
   layouts:
     application:
       page_title: Inventory Management
+      sign_in: Sign in
+      sign_out: Sign out
   products:
     index:
       title: Products

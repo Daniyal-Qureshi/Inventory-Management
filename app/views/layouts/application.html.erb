@@ -19,11 +19,22 @@
 
   <body class='bg-gray-100 text-gray-800'>
     <div class='min-h-screen lg:mx-auto lg:container'>
-      <header class='text-4xl font-bold px-8 py-4'>
-        <%= link_to root_path do %>
-          <h1><%= t ".page_title" %></h1>
-        <% end %>
-      </header>
+      <div class='flex justify-between items-center'>
+        <header class='text-4xl font-bold px-8 py-4'>
+          <%= link_to root_path do %>
+            <h1><%= t ".page_title" %></h1>
+          <% end %>
+        </header>
+        <div class='px-8'>
+          <% if controller_name != 'sessions' %>
+            <% if signed_in? %>
+              <%= link_to t(".sign_out"), sign_out_path, method: :delete %>
+            <% else %>
+              <%= link_to t(".sign_in"), sign_in_path %>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
       <div class='px-8'>
         <%= yield %>
       </div>

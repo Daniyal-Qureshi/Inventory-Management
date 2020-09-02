@@ -1,4 +1,9 @@
 FactoryBot.define do
+  factory :employee do
+    sequence(:name) { |n| "Employee ##{n}" }
+    sequence(:access_code) { |n| format('%05d', n) }
+  end
+
   factory :product do
     sequence(:name) { |n| "Product #{n}" }
     price factory: :amount

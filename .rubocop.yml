@@ -13,3 +13,13 @@ Style/Documentation:
   Enabled: false
 Style/FrozenStringLiteralComment:
   Enabled: false
+Style/GuardClause:
+  Enabled: false
+Style/EmptyMethod:
+  EnforcedStyle: expanded
+Metrics/BlockLength:
+  ExcludedMethods: ['feature', 'describe', 'context']
+Style/FormatStringToken:
+  Enabled: false
+Style/IfUnlessModifier:
+  Enabled: false

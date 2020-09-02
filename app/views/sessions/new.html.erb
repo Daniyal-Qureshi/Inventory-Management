@@ -1,0 +1,8 @@
+<div class='w-full'>
+  <%= form_for :session, url: sign_in_path, method: :post, html: { class: 'mx-auto bg-white shadow-md rounded-md p-8 max-w-xs' } do |form| %>
+    <%= form.label :access_code, class: 'font-semibold mb-1 block' %>
+    <%= form.text_field :access_code, class: 'border appearance-none shadow w-full p-2 mb-4 text-center' %>
+
+    <%= form.submit class: 'p-2 rounded-md w-full text-white bg-teal-700 cursor-pointer' %>
+  <% end %>
+</div>

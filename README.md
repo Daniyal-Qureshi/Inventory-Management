@@ -40,6 +40,12 @@ Seed the database by running:
 rake dev_seed
 ```
 
+### Employee Credentials
+
+Once the application has been seeded, you can use access codes from the
+[`DevSeed`](./lib/dev_seed.rb) class (under `DevSeed::EMPLOYEES`) to
+authenticate as different employees.
+
 ## Testing
 
 Tests are written with [RSpec](https://rspec.info/).

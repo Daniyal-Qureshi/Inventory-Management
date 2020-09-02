@@ -24,6 +24,14 @@ Install necessary development dependencies with [Homebrew](https://brew.sh/):
 brew bundle
 ```
 
+## Running the Application Locally
+
+Use [`heroku-cli`](https://devcenter.heroku.com/articles/heroku-cli):
+
+```sh
+heroku local -f Procfile.dev
+```
+
 ## Testing
 
 Tests are written with [RSpec](https://rspec.info/).

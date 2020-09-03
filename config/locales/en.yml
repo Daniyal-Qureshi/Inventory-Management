@@ -18,4 +18,8 @@ en:
       sign_out: Sign out
   products:
     index:
+      quantity:
+        one: Only 1 left in stock
+        other: "%{count} in stock"
+        zero: Out of stock
       title: Products

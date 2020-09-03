@@ -8,9 +8,18 @@ RSpec.feature 'View products' do
 
     visit root_path
 
-    expect(page).to display_product('4x6 Picture Frame')
-    expect(page).to display_product('5x7 Picture Frame')
-    expect(page).to display_product('8x10 Picture Frame')
+    small_frame_on_page = ProductOnPage.new('4x6 Picture Frame')
+    medium_frame_on_page = ProductOnPage.new('5x7 Picture Frame')
+    large_frame_on_page = ProductOnPage.new('8x10 Picture Frame')
+
+    expect(small_frame_on_page).to have_display_name
+    expect(small_frame_on_page).to be_priced_at(build(:amount, :small))
+
+    expect(medium_frame_on_page).to have_display_name
+    expect(medium_frame_on_page).to be_priced_at(build(:amount, :medium))
+
+    expect(large_frame_on_page).to have_display_name
+    expect(large_frame_on_page).to be_priced_at(build(:amount, :large))
   end
 
   def display_product(name)

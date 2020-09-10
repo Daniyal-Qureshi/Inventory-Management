@@ -1,3 +1,47 @@
 @import 'tailwindcss/base';
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
+
+.generic-table {
+  @apply table-auto w-full;
+
+  thead {
+    @apply bg-teal-500 text-white;
+  }
+
+  tfoot {
+    @apply bg-gray-100 border-t;
+  }
+
+  th {
+    @apply font-semibold;
+  }
+
+  th, td {
+    @apply px-4 py-2 text-left;
+
+    &.number {
+      text-align: right;
+    }
+  }
+
+  .metadata {
+    @apply text-xs text-gray-400;
+  }
+}
+
+.zebra {
+  tbody tr {
+    &:nth-of-type(2n) {
+      @apply bg-gray-100;
+
+      &:hover {
+        @apply bg-teal-100;
+      }
+    }
+
+    &:hover {
+      @apply bg-teal-100;
+    }
+  }
+}

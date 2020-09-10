@@ -2,6 +2,16 @@
 en:
   employees:
     index:
+      recent_orders:
+        header: Recent Orders
+        table:
+          fulfilled: Status
+          order_amount: Amount
+          order_id: Order ID
+          order_id_value: 'Order #%{id}'
+          product_count:
+            one: 1 product
+            other: "%{count} products"
       title: Employee Portal
       welcome: Welcome, %{name}
   helpers:
@@ -16,6 +26,26 @@ en:
       page_title: Inventory Management
       sign_in: Sign in
       sign_out: Sign out
+  order:
+    fulfilled: Fulfilled
+    unfulfilled: Unfulfilled
+  orders:
+    show:
+      fulfill_order: Fulfill order
+      order:
+        fulfilled: Order has been fulfilled
+        header: 'Order ID #%{id}'
+      product_table:
+        on_shelf: "%{count} on shelf"
+        order_total: Order total
+        thead:
+          cost: Cost
+          name: Product Name
+          quantity: Quantity
+      products:
+        header: Line Items
+      ships_to:
+        header: Ships To
   products:
     index:
       quantity:

@@ -81,6 +81,8 @@ GEM
     factory_bot_rails (6.1.0)
       factory_bot (~> 6.1.0)
       railties (>= 5.0.0)
+    faker (2.13.0)
+      i18n (>= 1.6, < 2)
     ffi (1.13.1)
     globalid (0.4.2)
       activesupport (>= 4.2.0)
@@ -214,6 +216,9 @@ GEM
       sprockets (> 3.0)
       sprockets-rails
       tilt
+    scenic (1.5.2)
+      activerecord (>= 4.0.0)
+      railties (>= 4.0.0)
     spring (2.1.1)
     spring-commands-rspec (1.0.4)
       spring (>= 0.9.1)
@@ -262,6 +267,7 @@ DEPENDENCIES
   byebug
   capybara
   factory_bot_rails
+  faker
   i18n-tasks
   listen (~> 3.2)
   money-rails
@@ -272,6 +278,7 @@ DEPENDENCIES
   rubocop
   rubocop-performance
   sass-rails (>= 6)
+  scenic (~> 1.5)
   spring
   spring-commands-rspec
   spring-watcher-listen (~> 2.0.0)

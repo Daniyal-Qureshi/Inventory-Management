@@ -1,11 +1,12 @@
 class ShipInventory
-  def self.run(employee, inventory_items)
-    new(employee: employee, inventory_items: inventory_items).run
+  def self.run(employee, inventory_items, order)
+    new(employee: employee, inventory_items: inventory_items, order: order).run
   end
 
-  def initialize(employee:, inventory_items:)
+  def initialize(employee:, inventory_items:, order:)
     @employee = employee
     @inventory_items = inventory_items
+    @order = order
   end
 
   def run
@@ -18,7 +19,7 @@ class ShipInventory
 
   private
 
-  attr_reader :employee, :inventory_items
+  attr_reader :employee, :inventory_items, :order
 
   def ship_inventory(inventory)
     inventory.with_lock do
@@ -28,7 +29,7 @@ class ShipInventory
         status_to: :shipped,
         actor: employee
       )
-      inventory.update!(status: :shipped)
+      inventory.update!(status: :shipped, order: order)
     end
   end
 end

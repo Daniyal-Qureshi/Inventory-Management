@@ -1,4 +1,22 @@
 FactoryBot.define do
+  factory :order do
+    ships_to factory: :address
+  end
+
+  factory :order_line_item do
+    product
+    order
+    quantity { 1 }
+  end
+
+  factory :address do
+    recipient { 'Full name' }
+    street_1 { '123 Main St' }
+    city { 'New York City' }
+    state { 'NY' }
+    zip { '10001' }
+  end
+
   factory :employee do
     sequence(:name) { |n| "Employee ##{n}" }
     sequence(:access_code) { |n| format('%05d', n) }

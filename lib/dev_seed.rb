@@ -1,4 +1,11 @@
 class DevSeed
+  ORDER_COUNT = 200
+  ADDRESS_COUNT = 30
+  RECEIVED_PRODUCT_COUNT = 300
+  RECEIVED_PRODUCT_INVENTORY_COUNT = 10
+  MAXIMUM_LINE_ITEM_ORDER_QUANTITY = 10
+  MAXIMUM_LINE_ITEMS_PER_ORDER = 7
+
   PRICINGS = {
     '3x5' => Money.new(499, 'USD'),
     '4x6' => Money.new(999, 'USD'),
@@ -24,7 +31,9 @@ class DevSeed
   def run
     create_products
     create_employees
+    create_customer_addresses
     create_inventory
+    create_orders
     ship_in_stock_inventory
   end
 
@@ -45,8 +54,8 @@ class DevSeed
   end
 
   def create_inventory
-    100.times do
-      ReceiveProduct.run(random_employee, random_product, rand(5))
+    RECEIVED_PRODUCT_COUNT.times do
+      ReceiveProduct.run(random_employee, random_product, RECEIVED_PRODUCT_INVENTORY_COUNT)
     end
   end
 
@@ -58,12 +67,53 @@ class DevSeed
     Product.order('RANDOM()').first
   end
 
+  def random_address
+    Address.order('RANDOM()').first
+  end
+
   def ship_in_stock_inventory
-    5.times do
-      ShipInventory.run(
-        random_employee,
-        Inventory.on_shelf.order('RANDOM()').limit(rand(5))
-      )
+    while (order = FulfillableOrdersQuery.new.first).present?
+      FindFulfillableOrder.fulfill_order(random_employee, order.id)
     end
+  end
+
+  def create_customer_addresses
+    ADDRESS_COUNT.times do
+      create_address
+    end
+  end
+
+  def create_address
+    Address.create!(
+      recipient: Faker::Name.name,
+      street_1: Faker::Address.street_address,
+      street_2: Faker::Address.secondary_address,
+      city: Faker::Address.city,
+      state: Faker::Address.state_abbr,
+      zip: Faker::Address.zip_code
+    )
+  end
+
+  def create_orders
+    ORDER_COUNT.times do
+      create_order
+    end
+  end
+
+  def create_order
+    Order.transaction do
+      order = Order.create!(ships_to: random_address)
+
+      random_products_for_order.each do |product|
+        order.line_items.create!(
+          product: product,
+          quantity: rand(MAXIMUM_LINE_ITEM_ORDER_QUANTITY) + 1
+        )
+      end
+    end
+  end
+
+  def random_products_for_order
+    (rand(MAXIMUM_LINE_ITEMS_PER_ORDER) + 1).times.map { random_product }.uniq
   end
 end

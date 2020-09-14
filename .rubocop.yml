@@ -13,15 +13,23 @@ Style/Documentation:
   Enabled: false
 Style/FrozenStringLiteralComment:
   Enabled: false
+Style/SafeNavigation:
+  Enabled: false
 Style/GuardClause:
   Enabled: false
 Style/EmptyMethod:
   EnforcedStyle: expanded
 Metrics/BlockLength:
-  ExcludedMethods: ['feature', 'describe', 'context']
+  ExcludedMethods: ['feature', 'describe', 'context', 'FactoryBot.define']
 Style/FormatStringToken:
   Enabled: false
 Style/IfUnlessModifier:
   Enabled: false
+Style/NegatedIf:
+  Enabled: false
+Style/WhileUntilModifier:
+  Enabled: false
 Metrics/MethodLength:
-  ExcludedMethods: ['up']
+  ExcludedMethods: ['up', 'arel']
+Metrics/AbcSize:
+  IgnoredMethods: ['arel']

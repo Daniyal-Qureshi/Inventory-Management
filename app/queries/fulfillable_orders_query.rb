@@ -7,6 +7,12 @@ class FulfillableOrdersQuery
     ).first
   end
 
+  def limit(value)
+    Order.find_by_sql(
+      arel.take(value).to_sql
+    )
+  end
+
   private
 
   def records

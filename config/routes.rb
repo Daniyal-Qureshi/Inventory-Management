@@ -8,4 +8,8 @@ Rails.application.routes.draw do
   resources :orders, only: :show do
     resource :fulfill, only: [:create]
   end
+
+  resources :products do
+    resource :receive, only: [:create]
+  end
 end

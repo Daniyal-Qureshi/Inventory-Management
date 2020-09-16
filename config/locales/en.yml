@@ -2,23 +2,28 @@
 en:
   employees:
     index:
+      fulfillable_orders:
+        header: Fulfillable Orders
+      receive_product:
+        header: Receive New Product
+        table:
+          needed: "%{count} needed"
+          on_shelf: "%{count} on shelf"
+          product: Product
+          quantity: Receive Quantity
       recent_orders:
         header: Recent Orders
-        table:
-          fulfilled: Status
-          order_amount: Amount
-          order_id: Order ID
-          order_id_value: 'Order #%{id}'
-          product_count:
-            one: 1 product
-            other: "%{count} products"
       title: Employee Portal
       welcome: Welcome, %{name}
   helpers:
     label:
+      receive_product:
+        quantity: Quantity
       session:
         access_code: Enter your access code
     submit:
+      receive_product:
+        submit: Receive
       session:
         submit: Sign in
   layouts:
@@ -27,8 +32,9 @@ en:
       sign_in: Sign in
       sign_out: Sign out
   order:
+    fulfillable: Fulfillable
     fulfilled: Fulfilled
-    unfulfilled: Unfulfilled
+    unfulfillable: Unfulfillable
   orders:
     show:
       fulfill_order: Fulfill order
@@ -46,6 +52,14 @@ en:
         header: Line Items
       ships_to:
         header: Ships To
+    table:
+      fulfilled: Status
+      order_amount: Amount
+      order_id: Order ID
+      order_id_value: 'Order #%{id}'
+      product_count:
+        one: 1 product
+        other: "%{count} products"
   products:
     index:
       quantity:

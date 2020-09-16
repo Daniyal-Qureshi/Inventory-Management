@@ -1,0 +1,39 @@
+<table class='generic-table zebra'>
+  <thead>
+    <tr>
+      <th><%= t '.fulfilled' %></th>
+      <th><%= t '.order_id' %></th>
+      <th class='number'><%= t '.order_amount' %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% orders.each do |order| %>
+      <tr data-id='order-<%= order.id %>'>
+        <td>
+          <span class='px-2 py-1 rounded-md text-xs shadow-sm <%= order_status_class(order) %>'>
+            <%= order_status(order) %>
+          </span>
+        </td>
+        <td>
+          <div>
+            <%= link_to order_path(order) do %>
+              <%= t '.order_id_value', id: order.id %>
+            <% end %>
+          </div>
+          <div class='text-xs text-gray-400'>
+            <%= order.ships_to.recipient %>
+          </div>
+        </td>
+        <td class='number'>
+          <div>
+            <%= humanized_money_with_symbol order.cost %>
+          </div>
+          <div class='metadata'>
+            <%= t '.product_count', count: order.line_items.sum(:quantity) %>
+          </div>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+

@@ -12,32 +12,12 @@ RSpec.feature 'Employee fulfills order' do
     click_on sign_in
     attempt_code('41315')
 
-    expect(page).to have_unfulfilled_order(order)
+    expect(page).to have_fulfillable_order(order)
     view_order(order)
     fulfill_order
     expect(page).to have_fulfilled_order(order)
 
     view_order(order)
     expect(page).not_to allow_fulfillment
-  end
-
-  def have_unfulfilled_order(order)
-    have_css("[data-id=order-#{order.id}]", text: 'Unfulfilled')
-  end
-
-  def have_fulfilled_order(order)
-    have_css("[data-id=order-#{order.id}]", text: 'Fulfilled')
-  end
-
-  def view_order(order)
-    find("[data-id=order-#{order.id}] a").click
-  end
-
-  def fulfill_order
-    click_on(t('orders.show.fulfill_order'))
-  end
-
-  def allow_fulfillment
-    have_css('button:not(:disabled)')
   end
 end

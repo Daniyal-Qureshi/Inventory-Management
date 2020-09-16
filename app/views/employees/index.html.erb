@@ -2,46 +2,54 @@
 
 <p class='employees__welcome text-xl font-light pb-4'><%= t '.welcome', name: current_user.name %></p>
 
-<div class='flex flex-wrap'>
-  <div class='w-full md:w-1/2 lg:w-1/2 bg-white rounded-md shadow-md border overflow-hidden'>
-    <h3 class='text-2xl font-bold px-4 py-2'><%= t '.recent_orders.header' %></h3>
-    <table class='generic-table zebra'>
-      <thead>
-        <tr>
-          <th><%= t '.recent_orders.table.fulfilled' %></th>
-          <th><%= t '.recent_orders.table.order_id' %></th>
-          <th class='number'><%= t '.recent_orders.table.order_amount' %></th>
-        </tr>
-      </thead>
-      <tbody>
-        <% @recent_orders.each_with_index do |order, i| %>
-          <tr data-id='order-<%= order.id %>'>
-            <td>
-              <span class='px-2 py-1 rounded-md text-xs shadow-sm <%= order_status_class(order) %>'>
-                <%= order_status(order) %>
-              </span>
-            </td>
-            <td>
-              <div>
-                <%= link_to order_path(order) do %>
-                  <%= t '.recent_orders.table.order_id_value', id: order.id %>
-                <% end %>
-              </div>
-              <div class='text-xs text-gray-400'>
-                <%= order.ships_to.recipient %>
-              </div>
-            </td>
-            <td class='number'>
-              <div>
-                <%= humanized_money_with_symbol order.cost %>
-              </div>
-              <div class='metadata'>
-                <%= t '.recent_orders.table.product_count', count: order.line_items.sum(:quantity) %>
-              </div>
-            </td>
+<div class='flex flex-wrap md:-mx-2 lg:-mx-2'>
+  <div class='mb-4 md:px-2 lg:px-2 w-full md:w-1/2 lg:w-1/2'>
+    <div class='bg-white rounded-md shadow-md border overflow-hidden'>
+      <h3 class='text-2xl font-bold px-4 py-2'><%= t '.receive_product.header' %></h3>
+      <table class='generic-table zebra'>
+        <thead>
+          <tr>
+            <th><%= t '.receive_product.table.product' %></th>
+            <th class='number'><%= t '.receive_product.table.quantity' %></th>
           </tr>
-        <% end %>
-      </tbody>
-    </table>
+        </thead>
+        <tbody>
+          <% @products.each do |product| %>
+            <tr data-id='product-<%= product.id %>'>
+              <td>
+                <%= product.name %>
+                <div class='metadata'>
+                  <%= t '.receive_product.table.on_shelf', count: product.in_stock_count %>
+                </div>
+                <div class='metadata'>
+                  <%= t '.receive_product.table.needed', count: product.needed_inventory_count %>
+                </div>
+              </td>
+              <td class='number'>
+                <%= form_for :receive_product, url: product_receive_path(product) do |form| %>
+                  <%= form.label :quantity, class: 'hidden' %>
+                  <%= form.number_field :quantity, min: 1, required: true, class: 'w-24 border p-1 text-right rounded-sm' %>
+                  <%= form.submit class: 'bg-teal-600 text-white p-1 px-3 ml-2' %>
+                <% end %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <% if @fulfillable_orders.any? %>
+    <div class='mb-4 md:px-2 lg:px-2 w-full md:w-1/2 lg:w-1/2'>
+      <div class='bg-white rounded-md shadow-md border overflow-hidden'>
+        <h3 class='text-2xl font-bold px-4 py-2'><%= t '.fulfillable_orders.header' %></h3>
+        <%= render 'orders/table', orders: @fulfillable_orders %>
+      </div>
+    </div>
+  <% end %>
+  <div class='mb-4 md:px-2 lg:px-2 w-full md:w-1/2 lg:w-1/2'>
+    <div class='bg-white rounded-md shadow-md border overflow-hidden'>
+      <h3 class='text-2xl font-bold px-4 py-2'><%= t '.recent_orders.header' %></h3>
+      <%= render 'orders/table', orders: @recent_orders %>
+    </div>
   </div>
 </div>

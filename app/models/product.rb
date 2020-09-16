@@ -6,4 +6,8 @@ class Product < ApplicationRecord
   def in_stock_count
     inventory.on_shelf.count
   end
+
+  def needed_inventory_count
+    NeededInventoryQuery.new(self).quantity
+  end
 end

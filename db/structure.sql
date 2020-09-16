@@ -231,19 +231,6 @@ ALTER SEQUENCE public.orders_id_seq OWNED BY public.orders.id;
 
 
 --
--- Name: product_on_shelf_quantities; Type: VIEW; Schema: public; Owner: -
---
-
-CREATE VIEW public.product_on_shelf_quantities AS
- SELECT i.product_id,
-    count(i.product_id) AS quantity
-   FROM public.inventories i
-  WHERE (i.status = 'on_shelf'::public.inventory_statuses)
-  GROUP BY i.product_id
-  ORDER BY i.product_id;
-
-
---
 -- Name: products; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -256,6 +243,19 @@ CREATE TABLE public.products (
     created_at timestamp(6) without time zone NOT NULL,
     updated_at timestamp(6) without time zone NOT NULL
 );
+
+
+--
+-- Name: product_on_shelf_quantities; Type: VIEW; Schema: public; Owner: -
+--
+
+CREATE VIEW public.product_on_shelf_quantities AS
+ SELECT p.id AS product_id,
+    count(i.product_id) AS quantity
+   FROM (public.products p
+     LEFT JOIN public.inventories i ON (((p.id = i.product_id) AND (i.status = 'on_shelf'::public.inventory_statuses))))
+  GROUP BY p.id
+  ORDER BY p.id;
 
 
 --
@@ -539,6 +539,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20200908151453'),
 ('20200908151850'),
 ('20200908224208'),
-('20200909133724');
+('20200909133724'),
+('20200916154424');
 
 

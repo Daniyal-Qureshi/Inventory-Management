@@ -28,6 +28,7 @@
         <div class='px-8'>
           <% if controller_name != 'sessions' %>
             <% if signed_in? %>
+              <%= link_to t(".portal"), employees_path, class: 'mr-2' %>
               <%= link_to t(".sign_out"), sign_out_path, method: :delete %>
             <% else %>
               <%= link_to t(".sign_in"), sign_in_path %>

@@ -37,7 +37,33 @@ class DevSeed
     ship_in_stock_inventory
   end
 
-  private
+  def create_order(address)
+    Order.transaction do
+      order = Order.create!(ships_to: address)
+
+      random_products_for_order.each do |product|
+        order.line_items.create!(
+          product: product,
+          quantity: rand(MAXIMUM_LINE_ITEM_ORDER_QUANTITY) + 1
+        )
+      end
+    end
+  end
+
+  def create_address
+    Address.create!(
+      recipient: Faker::Name.name,
+      street_1: Faker::Address.street_address,
+      street_2: Faker::Address.secondary_address,
+      city: Faker::Address.city,
+      state: Faker::Address.state_abbr,
+      zip: Faker::Address.zip_code
+    )
+  end
+
+  def random_address
+    Address.order('RANDOM()').first
+  end
 
   def create_products
     PRICINGS.each do |size, price|
@@ -46,6 +72,8 @@ class DevSeed
       end
     end
   end
+
+  private
 
   def create_employees
     EMPLOYEES.each do |name, access_code|
@@ -67,10 +95,6 @@ class DevSeed
     Product.order('RANDOM()').first
   end
 
-  def random_address
-    Address.order('RANDOM()').first
-  end
-
   def ship_in_stock_inventory
     while (order = FulfillableOrdersQuery.new.first).present?
       FindFulfillableOrder.fulfill_order(random_employee, order.id)
@@ -83,33 +107,9 @@ class DevSeed
     end
   end
 
-  def create_address
-    Address.create!(
-      recipient: Faker::Name.name,
-      street_1: Faker::Address.street_address,
-      street_2: Faker::Address.secondary_address,
-      city: Faker::Address.city,
-      state: Faker::Address.state_abbr,
-      zip: Faker::Address.zip_code
-    )
-  end
-
   def create_orders
     ORDER_COUNT.times do
-      create_order
-    end
-  end
-
-  def create_order
-    Order.transaction do
-      order = Order.create!(ships_to: random_address)
-
-      random_products_for_order.each do |product|
-        order.line_items.create!(
-          product: product,
-          quantity: rand(MAXIMUM_LINE_ITEM_ORDER_QUANTITY) + 1
-        )
-      end
+      create_order(random_address)
     end
   end
 

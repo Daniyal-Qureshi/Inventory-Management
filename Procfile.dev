@@ -1,2 +1,3 @@
 web: bundle exec puma -C config/puma.rb
 webpack: bin/webpack-dev-server
+simulate_platform_use: rake simulate_platform_use

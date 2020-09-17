@@ -55,3 +55,7 @@ To run the test suite:
 ```sh
 ./bin/rspec
 ```
+
+## License
+
+Copyright 2020 Techieminions. See the [LICENSE](LICENSE).

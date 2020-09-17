@@ -1,4 +1,19 @@
 module ApplicationHelper
+  def employee_breadcrumb(&block)
+    content_tag 'ul', class: 'employees__header flex text-gray-600 py-4 text-2xl font-semibold' do
+      base = content_tag 'li', nil, class: 'text-teal-700' do
+        link_to t('employees.index.title'), employees_path, class: 'underline'
+      end
+
+      concat(base)
+
+      if block_given?
+        concat content_tag('li', '/', class: 'mx-2')
+        concat content_tag('li', capture { block.call(self) })
+      end
+    end
+  end
+
   def order_status(order)
     if order.fulfilled?
       t('order.fulfilled')

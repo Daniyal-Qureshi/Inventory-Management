@@ -2,42 +2,33 @@
 
 This is a Ruby on Rails web application for inventory management.
 
+## Interview Prompts
+
+This application can be used as a baseline Ruby on Rails application for
+feature development as evaluation criteria during technical interviews.
+
+* [Tech lead prompts]
+
+[Tech lead prompts]: ./TECH_LEAD_PROMPTS.md
+
 ## Local Development
 
 You'll want to configure your machine to run:
 
 * Ruby 2.7.1
-* NodeJS 14.9.0
-* Postgres 12.4
+* Node.js 14.9.0
+* Postgres
 
-### Preferred Setup: asdf and Homebrew
+## Setup
 
-Install necessary language versions with [asdf](https://asdf-vm.com):
-
-```sh
-asdf install
-```
-
-Install necessary development dependencies with [Homebrew](https://brew.sh/):
-
-```sh
-brew bundle
-```
+Please run 'bin/setup'.
 
 ## Running the Application Locally
 
 Use [`heroku-cli`](https://devcenter.heroku.com/articles/heroku-cli):
 
 ```sh
-heroku local -f Procfile.dev
-```
-
-### Development Seeds
-
-Seed the database by running:
-
-```sh
-rake dev_seed
+bundle exec heroku local -f Procfile.dev
 ```
 
 ### Employee Credentials
@@ -53,9 +44,9 @@ Tests are written with [RSpec](https://rspec.info/).
 To run the test suite:
 
 ```sh
-./bin/rspec
+bin/rspec
 ```
 
 ## License
 
-Copyright 2020 Techieminions. See the [LICENSE](LICENSE).
+Copyright 2020–2021 Techieminions. See the [LICENSE](LICENSE).

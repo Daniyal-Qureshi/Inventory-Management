@@ -1,10 +1,10 @@
 class FindFulfillableOrder
   def self.begin_fulfillment(employee)
-    fulfill(employee, FulfillableOrdersQuery.new.first)
+    fulfill(employee, Order.fulfillable.first)
   end
 
   def self.fulfill_order(employee, order_id)
-    fulfill(employee, FulfillableOrdersQuery.new.find(order_id))
+    fulfill(employee, Order.fulfillable.where(id: order_id).first)
   end
 
   def self.fulfill(employee, order)

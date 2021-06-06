@@ -9,15 +9,15 @@ RSpec.describe FindFulfillableOrder do
     order = create(:order, line_items: [build(:order_line_item, product: product, quantity: 2)])
     second_order = create(:order, line_items: [build(:order_line_item, product: product, quantity: 2)])
 
-    expect(FulfilledOrdersQuery.new).to be_empty
+    expect(Order.fulfilled).to be_empty
 
     FindFulfillableOrder.begin_fulfillment(employee)
 
-    expect(FulfilledOrdersQuery.new).to match_array([order])
+    expect(Order.fulfilled).to match_array([order])
 
     FindFulfillableOrder.begin_fulfillment(employee)
 
-    expect(FulfilledOrdersQuery.new).to match_array([order, second_order])
+    expect(Order.fulfilled).to match_array([order, second_order])
 
     expect(FindFulfillableOrder.begin_fulfillment(employee)).to be_nil
   end

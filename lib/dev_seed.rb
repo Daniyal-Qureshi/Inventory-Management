@@ -96,7 +96,7 @@ class DevSeed
   end
 
   def ship_in_stock_inventory
-    while (order = FulfillableOrdersQuery.new.first).present?
+    while (order = Order.fulfillable.first)
       FindFulfillableOrder.fulfill_order(random_employee, order.id)
     end
   end

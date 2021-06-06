@@ -28,6 +28,26 @@ needing to collect further information, downtime for any migrations, changes to
 employee processes, or messaging around new functionality) in the corresponding
 commit message.
 
+## Getting Familiar
+
+### `on_shelf` counter cache
+
+The current version of the application has a view `product_on_shelf_quantities`
+to easily refer to the amount of units available in the inventory in SQL.
+However, the business is growing and that view is starting to become costly.
+
+Implement a counter cache stored in a new column `products.on_shelf`, drop the
+view, and update the existing queries. You can assume downtime to initialize the
+cache, but its maintenance should be robust and free of race conditions.
+
+### `Order#fulfillable?` needs a fix
+
+If you study the current model, you'll see the method `Order#fulfillable?` has a
+logic bug. Write a comment above the method definition explaining what has been
+overlooked and possible ways to address it.
+
+You do not need to write the fix.
+
 ## New Feature: Handle Undeliverable Orders
 
 ### Scenario
@@ -48,18 +68,21 @@ Once an order is marked as returned, the physical products will need to be
 placed back on the shelf; until that happens, they should not show as available
 inventory.
 
-Currently, all employees within the system are warehouse employees.
-
 ### Features / Jobs to be Done
 
+* Currently, all employees within the system are warehouse employees, customer
+  service employees have not been modelled yet. You should modify the system to
+  have both roles. Please, take into account that no employee has two roles.
 * As a warehouse employee responsible for tracking inventory (both within the
   warehouse and shipped to customers), I want to mark an order I receive back
   as "returned" so the inventory is eventually made available again for other
-  customers.
-* As a customer service representative responsible for high customer
-  satisfaction, I want to be able to see a list of customers assigned to me
-  who've had orders returned so I can fix their address after talking to them
-  on the phone or over email.
+  orders. You can assume all returned products are in perfect condition and can
+  be added to the inventory.
 * As a warehouse employee, I want to be able to restock all returned product on
   a per-product basis to reduce the number of times I have to walk to a
   specific pick location.
+* As a customer service representative responsible for high customer
+  satisfaction, I want to be able to see a list of customers who've had orders
+  returned so I can fix their address after talking to them. The list of
+  customers with issues gets reduced as their addresses get fixed. Marking a
+  customer's address as fixed has no undo in this sample application.

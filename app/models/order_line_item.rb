@@ -8,7 +8,7 @@ class OrderLineItem < ApplicationRecord
   end
 
   def on_shelf_quantity
-    ProductOnShelfQuantity.find_by(product: product)&.quantity || 0
+    ProductOnShelfQuantity.find_by(product:)&.quantity || 0
   end
 
   def fulfillable?

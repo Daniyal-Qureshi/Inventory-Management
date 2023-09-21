@@ -6,8 +6,8 @@ RSpec.describe FindFulfillableOrder do
     product = create(:product)
 
     ReceiveProduct.run(employee, product, 5)
-    order = create(:order, line_items: [build(:order_line_item, product: product, quantity: 2)])
-    second_order = create(:order, line_items: [build(:order_line_item, product: product, quantity: 2)])
+    order = create(:order, line_items: [build(:order_line_item, product:, quantity: 2)])
+    second_order = create(:order, line_items: [build(:order_line_item, product:, quantity: 2)])
 
     expect(Order.fulfilled).to be_empty
 

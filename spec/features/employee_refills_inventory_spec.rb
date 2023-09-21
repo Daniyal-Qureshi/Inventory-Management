@@ -6,7 +6,7 @@ RSpec.feature 'Employee refills inventory' do
     employee = create(:employee, name: 'Jane Doe', access_code: '41315')
     ReceiveProduct.run(employee, product, 5)
     order = create(:order)
-    create(:order_line_item, order: order, product: product, quantity: 25)
+    create(:order_line_item, order:, product:, quantity: 25)
 
     visit root_path
     click_on sign_in
@@ -31,8 +31,8 @@ RSpec.feature 'Employee refills inventory' do
 
   def refill_inventory(product, quantity)
     within("[data-id='product-#{product.id}'] form") do
-      fill_in t('helpers.label.receive_product.quantity'), with: quantity
-      click_on t('helpers.submit.receive_product.submit')
+      fill_in I18n.t('helpers.label.receive_product.quantity'), with: quantity
+      click_on I18n.t('helpers.submit.receive_product.submit')
     end
   end
 end

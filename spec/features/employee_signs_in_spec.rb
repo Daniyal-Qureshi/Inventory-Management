@@ -33,23 +33,23 @@ RSpec.feature 'Employee signs in' do
   end
 
   def sign_in
-    t('layouts.application.sign_in')
+    I18n.t('layouts.application.sign_in')
   end
 
   def sign_out
-    t('layouts.application.sign_out')
+    I18n.t('layouts.application.sign_out')
   end
 
   def attempt_code(code)
-    fill_in t('helpers.label.session.access_code'), with: code
-    click_on t('helpers.submit.session.submit')
+    fill_in I18n.t('helpers.label.session.access_code'), with: code
+    click_on I18n.t('helpers.submit.session.submit')
   end
 
   def display_employee_portal
-    have_css('.employees__header', text: t('employees.index.title'))
+    have_css('.employees__header', text: I18n.t('employees.index.title'))
   end
 
   def welcome_employee(name)
-    have_css('.employees__welcome', text: t('employees.index.welcome', name: name))
+    have_css('.employees__welcome', text: I18n.t('employees.index.welcome', name:))
   end
 end

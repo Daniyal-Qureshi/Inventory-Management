@@ -43,7 +43,7 @@ class DevSeed
 
       random_products_for_order.each do |product|
         order.line_items.create!(
-          product: product,
+          product:,
           quantity: rand(MAXIMUM_LINE_ITEM_ORDER_QUANTITY) + 1
         )
       end
@@ -68,7 +68,7 @@ class DevSeed
   def create_products
     PRICINGS.each do |size, price|
       COLORS.each do |color|
-        Product.create!(name: "#{color} #{size} Picture Frame", price: price)
+        Product.create!(name: "#{color} #{size} Picture Frame", price:)
       end
     end
   end
@@ -77,7 +77,7 @@ class DevSeed
 
   def create_employees
     EMPLOYEES.each do |name, access_code|
-      Employee.create!(name: name, access_code: access_code)
+      Employee.create!(name:, access_code:)
     end
   end
 

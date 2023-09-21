@@ -6,7 +6,7 @@ RSpec.feature 'Employee fulfills order' do
     employee = create(:employee, name: 'Jane Doe', access_code: '41315')
     ReceiveProduct.run(employee, product, 10)
     order = create(:order)
-    create(:order_line_item, order: order, product: product, quantity: 5)
+    create(:order_line_item, order:, product:, quantity: 5)
 
     visit root_path
     click_on sign_in

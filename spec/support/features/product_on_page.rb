@@ -1,9 +1,8 @@
-require_relative '../i18n'
+require 'money-rails/helpers/action_view_extension'
 
 ProductOnPage = Struct.new(:name) do
   include Capybara::DSL
   include MoneyRails::ActionViewExtension
-  include I18nMacros
 
   def has_display_name?
     product_element.has_css?('.product__header', text: name)
@@ -14,17 +13,17 @@ ProductOnPage = Struct.new(:name) do
   end
 
   def sold_out?
-    product_element.has_css?('.product__quantity', text: t('.products.index.quantity.zero'))
+    product_element.has_css?('.product__quantity', text: I18n.t('.products.index.quantity.zero'))
   end
 
   def has_in_stock?(count)
-    product_element.has_css?('.product__quantity', text: t('.products.index.quantity', count: count))
+    product_element.has_css?('.product__quantity', text: I18n.t('.products.index.quantity', count:))
   end
 
   private
 
   def product
-    @product ||= Product.find_by!(name: name)
+    @product ||= Product.find_by!(name:)
   end
 
   def product_element

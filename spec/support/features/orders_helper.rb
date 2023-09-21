@@ -16,7 +16,7 @@ module OrdersHelper
   end
 
   def fulfill_order
-    click_on(t('orders.show.fulfill_order'))
+    click_on(I18n.t('orders.show.fulfill_order'))
   end
 
   def allow_fulfillment

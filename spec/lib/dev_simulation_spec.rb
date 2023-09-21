@@ -29,9 +29,9 @@ RSpec.describe DevSimulation do
   end
 
   def run_sim(tick_seconds:, repeat_customer_likelihood:, new_order_likelihood:, duration:)
-    sim = DevSimulation.new(tick_seconds: tick_seconds,
-                            repeat_customer_likelihood: repeat_customer_likelihood,
-                            new_order_likelihood: new_order_likelihood)
+    sim = DevSimulation.new(tick_seconds:,
+                            repeat_customer_likelihood:,
+                            new_order_likelihood:)
 
     thread = Thread.new { sim.simulate_platform_use }
 

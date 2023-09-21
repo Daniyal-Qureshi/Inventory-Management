@@ -1,6 +1,6 @@
 class ShipInventory
   def self.run(employee, inventory_items, order)
-    new(employee: employee, inventory_items: inventory_items, order: order).run
+    new(employee:, inventory_items:, order:).run
   end
 
   def initialize(employee:, inventory_items:, order:)
@@ -24,12 +24,12 @@ class ShipInventory
   def ship_inventory(inventory)
     inventory.with_lock do
       InventoryStatusChange.create!(
-        inventory: inventory,
+        inventory:,
         status_from: inventory.status,
         status_to: :shipped,
         actor: employee
       )
-      inventory.update!(status: :shipped, order: order)
+      inventory.update!(status: :shipped, order:)
     end
   end
 end

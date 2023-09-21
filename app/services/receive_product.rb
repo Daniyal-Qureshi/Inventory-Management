@@ -1,6 +1,6 @@
 class ReceiveProduct
   def self.run(employee, product, quantity)
-    new(employee: employee, product: product, quantity: quantity).run
+    new(employee:, product:, quantity:).run
   end
 
   def initialize(employee:, product:, quantity:)
@@ -22,9 +22,9 @@ class ReceiveProduct
   attr_reader :employee, :product, :quantity
 
   def create_inventory
-    inventory = Inventory.create!(product: product, status: :on_shelf)
+    inventory = Inventory.create!(product:, status: :on_shelf)
     InventoryStatusChange.create!(
-      inventory: inventory,
+      inventory:,
       status_from: nil,
       status_to: :on_shelf,
       actor: employee

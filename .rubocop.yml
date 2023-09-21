@@ -20,7 +20,7 @@ Style/GuardClause:
 Style/EmptyMethod:
   EnforcedStyle: expanded
 Metrics/BlockLength:
-  ExcludedMethods: ['feature', 'describe', 'context', 'FactoryBot.define']
+  AllowedMethods: ['feature', 'describe', 'context', 'FactoryBot.define']
 Style/FormatStringToken:
   Enabled: false
 Style/IfUnlessModifier:
@@ -30,6 +30,9 @@ Style/NegatedIf:
 Style/WhileUntilModifier:
   Enabled: false
 Metrics/MethodLength:
-  ExcludedMethods: ['up', 'arel']
+  AllowedMethods: ['up', 'arel']
+  Max: 20
 Metrics/AbcSize:
-  IgnoredMethods: ['arel']
+  AllowedMethods: ['arel']
+Naming/VariableNumber:
+  EnforcedStyle: snake_case

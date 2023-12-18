@@ -15,7 +15,7 @@ feature development as evaluation criteria during technical interviews.
 
 You'll want to configure your machine to run:
 
-* Ruby 2.7.1
+* Ruby 3.2.2
 * Node.js 14.9.0
 * Postgres
 

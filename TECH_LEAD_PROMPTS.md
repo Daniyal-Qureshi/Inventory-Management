@@ -26,7 +26,7 @@ makes sense.
 Please capture any outstanding side-effects of changes (e.g. customer support
 needing to collect further information, downtime for any migrations, changes to
 employee processes, or messaging around new functionality) in the corresponding
-commit message.
+commit message. Also, make sure to add/fix test cases for the changes & new code.
 
 ## Getting Familiar
 

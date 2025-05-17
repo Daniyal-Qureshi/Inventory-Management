@@ -4,4 +4,7 @@ class Inventory < ApplicationRecord
   belongs_to :order, required: false
 
   validates :product, presence: true
+
+  scope :on_shelf, -> { where(status: :on_shelf) }
+  
 end

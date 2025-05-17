@@ -3,6 +3,11 @@ FactoryBot.define do
     ships_to factory: :address
   end
 
+  factory :inventory do
+    product
+    status { :on_shelf }
+  end
+  
   factory :order_line_item do
     product
     order

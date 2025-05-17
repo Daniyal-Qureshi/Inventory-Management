@@ -1,3 +1,4 @@
+require 'set'
 class ShipInventory
   def self.run(employee, inventory_items, order)
     new(employee:, inventory_items:, order:).run
@@ -10,10 +11,17 @@ class ShipInventory
   end
 
   def run
+    product_ids = Set.new
+
     Inventory.transaction do
       inventory_items.each do |inventory|
         ship_inventory(inventory)
+        product_ids << inventory.product_id
       end
+    end
+
+    product_ids.each do |product_id|
+      Product.find(product_id).update_on_shelf_counter
     end
   end
 

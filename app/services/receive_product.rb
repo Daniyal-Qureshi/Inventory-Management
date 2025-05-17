@@ -15,6 +15,7 @@ class ReceiveProduct
         create_inventory
       end
     end
+    product.update_on_shelf_counter
   end
 
   private

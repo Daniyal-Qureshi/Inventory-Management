@@ -10,7 +10,7 @@
             <h3 class='product__header font-semibold'><%= product.name %></h3>
             <p class='product__price'><%= humanized_money_with_symbol product.price %></p>
           </div>
-          <div class='product__quantity text-gray-400 text-xs italic'><%= t ".quantity", count: product.in_stock_count %></div>
+          <div class='product__quantity text-gray-400 text-xs italic'><%= t ".quantity", count: product.on_shelf %></div>
         </div>
       </div>
     </div>

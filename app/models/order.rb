@@ -16,14 +16,14 @@ class Order < ApplicationRecord
     not_fulfilled
       .joins(:line_items)
       .joins(<<~SQL)
-        INNER JOIN products
+        LEFT OUTER JOIN products
           ON order_line_items.product_id = products.id
-          AND order_line_items.quantity <= products.on_shelf
+         AND order_line_items.quantity <= products.on_shelf
       SQL
       .group(:id)
       .having(<<~SQL)
-        COUNT(DISTINCT order_line_items.product_id) =
-        COUNT(DISTINCT order_line_items.id)
+        COUNT(DISTINCT products.id) =
+        COUNT(DISTINCT order_line_items.product_id)
       SQL
       .order(:created_at, :id)
   }

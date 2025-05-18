@@ -1,9 +1,9 @@
 <table class='generic-table zebra'>
     <thead>
       <tr>
-        <th><%= t '.fulfilled' %></th>
-        <th><%= t '.order_id' %></th>
-        <th class='number'><%= t '.order_amount' %></th>
+        <th><%= t 'orders.table.fulfilled' %></th>
+        <th><%= t 'orders.table.order_id' %></th>
+        <th class='number'><%= t 'orders.table.order_amount' %></th>
       </tr>
     </thead>
     <tbody>
@@ -29,7 +29,7 @@
               <%= humanized_money_with_symbol order.cost %>
             </div>
             <div class='metadata'>
-              <%= t '.product_count', count: order.line_items.sum(:quantity) %>
+              <%= t 'orders.table.product_count', count: order.line_items.sum(:quantity) %>
             </div>
           </td>
         </tr>

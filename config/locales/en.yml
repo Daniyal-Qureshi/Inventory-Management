@@ -2,24 +2,25 @@
 en:
   addresses:
     edit_modal:
-      update_address: Update Shipping Address
       address_already_fixed: This address has already been marked as fixed
-      recipient: Recipient
-      street_1: Street Address
-      street_2: Street Address (line 2)
+      cancel: Cancel
       city: City
       state: State
-      zip: ZIP Code
+      street_1: Street Address
+      street_2: Street Address (line 2)
+      update_address: Update Shipping Address
       update_and_mark_fixed: Update and Mark as Fixed
-      cancel: Cancel
+      zip: ZIP Code
   customer_service:
     index:
-      edit_and_mark_fixed: Edit and Mark as Fixed
       address_fixed: Address Fixed
+      edit_and_mark_fixed: Edit and Mark as Fixed
   employees:
     index:
       fulfillable_orders:
         header: Fulfillable Orders
+      fulfilled_orders:
+        header: Fulfilled Orders
       receive_product:
         header: Receive New Product
         table:
@@ -27,19 +28,17 @@ en:
           on_shelf: "%{count} on shelf"
           product: Product
           quantity: Receive Quantity
+      recent_orders:
+        header: Recent Orders
+      returned_orders:
+        header: Returned Orders
       returned_products:
         header: Returned Products
         table:
+          actions: Actions
           product: Product
           quantity: Returned Quantity
-          actions: Actions
           restock: Restock
-      fulfilled_orders:
-        header: Fulfilled Orders
-      returned_orders:
-        header: Returned Orders
-      recent_orders:
-        header: Recent Orders
       title: Employee Portal
       welcome: Welcome, %{name}
   helpers:
@@ -55,47 +54,44 @@ en:
         submit: Sign in
   layouts:
     application:
+      customer_portal: Customer Service Portal
       page_title: Inventory Management
       portal: Portal
-      customer_portal: Customer Service Portal
       sign_in: Sign in
       sign_out: Sign out
   order:
     fulfillable: Fulfillable
     fulfilled: Fulfilled
-    unfulfillable: Unfulfillable
     returned: Returned
+    unfulfillable: Unfulfillable
   orders:
     show:
       fulfill_order: Fulfill order
       order:
         fulfilled: Order has been fulfilled
-        returned: Order has been returned
         header: 'Order ID #%{id}'
+        returned: Order has been returned
       product_table:
         on_shelf: "%{count} on shelf"
         order_total: Order total
-        returned: Returned
-        shipped: Shipped
         thead:
           cost: Cost
           name: Product Name
           quantity: Quantity
-          status: Status
       products:
         header: Line Items
       ships_to:
         header: Ships To
     table:
+      actions: Actions
       fulfilled: Status
+      mark_as_returned: Mark as Returned
       order_amount: Amount
       order_id: Order ID
       order_id_value: 'Order #%{id}'
       product_count:
         one: 1 product
         other: "%{count} products"
-      actions: Actions
-      mark_as_returned: Mark as Returned
   products:
     index:
       quantity:

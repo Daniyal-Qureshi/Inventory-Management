@@ -1,5 +1,21 @@
 ---
 en:
+  addresses:
+    edit_modal:
+      update_address: Update Shipping Address
+      address_already_fixed: This address has already been marked as fixed
+      recipient: Recipient
+      street_1: Street Address
+      street_2: Street Address (line 2)
+      city: City
+      state: State
+      zip: ZIP Code
+      update_and_mark_fixed: Update and Mark as Fixed
+      cancel: Cancel
+  customer_service:
+    index:
+      edit_and_mark_fixed: Edit and Mark as Fixed
+      address_fixed: Address Fixed
   employees:
     index:
       fulfillable_orders:
@@ -11,6 +27,17 @@ en:
           on_shelf: "%{count} on shelf"
           product: Product
           quantity: Receive Quantity
+      returned_products:
+        header: Returned Products
+        table:
+          product: Product
+          quantity: Returned Quantity
+          actions: Actions
+          restock: Restock
+      fulfilled_orders:
+        header: Fulfilled Orders
+      returned_orders:
+        header: Returned Orders
       recent_orders:
         header: Recent Orders
       title: Employee Portal
@@ -30,25 +57,31 @@ en:
     application:
       page_title: Inventory Management
       portal: Portal
+      customer_portal: Customer Service Portal
       sign_in: Sign in
       sign_out: Sign out
   order:
     fulfillable: Fulfillable
     fulfilled: Fulfilled
     unfulfillable: Unfulfillable
+    returned: Returned
   orders:
     show:
       fulfill_order: Fulfill order
       order:
         fulfilled: Order has been fulfilled
+        returned: Order has been returned
         header: 'Order ID #%{id}'
       product_table:
         on_shelf: "%{count} on shelf"
         order_total: Order total
+        returned: Returned
+        shipped: Shipped
         thead:
           cost: Cost
           name: Product Name
           quantity: Quantity
+          status: Status
       products:
         header: Line Items
       ships_to:
@@ -61,6 +94,8 @@ en:
       product_count:
         one: 1 product
         other: "%{count} products"
+      actions: Actions
+      mark_as_returned: Mark as Returned
   products:
     index:
       quantity:
@@ -68,3 +103,6 @@ en:
         other: "%{count} in stock"
         zero: Out of stock
       title: Products
+  returns:
+    show:
+      back_to_orders: Back to Orders

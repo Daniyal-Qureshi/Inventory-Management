@@ -1,7 +1,8 @@
 class InventoryStatusChange < ApplicationRecord
   STATUSES = {
     on_shelf: 'on_shelf',
-    shipped: 'shipped'
+    shipped: 'shipped',
+    returned: 'returned'
   }.freeze
 
   belongs_to :inventory

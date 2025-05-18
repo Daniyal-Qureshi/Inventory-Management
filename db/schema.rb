@@ -10,13 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_07_16_123200) do
+ActiveRecord::Schema[7.0].define(version: 2025_05_18_185551) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   # Custom types defined in this database.
   # Note that some types may not work with other database engines. Be careful if changing database.
-  create_enum "inventory_statuses", ["on_shelf", "shipped"]
+  create_enum "inventory_statuses", ["on_shelf", "shipped", "returned"]
 
   create_table "addresses", force: :cascade do |t|
     t.string "recipient", null: false
@@ -32,6 +32,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_07_16_123200) do
     t.string "access_code", limit: 5, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "role", default: 0, null: false
     t.index ["access_code"], name: "index_employees_on_access_code", unique: true
   end
 
@@ -70,6 +71,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_07_16_123200) do
     t.bigint "ships_to_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "address_fixed", default: false, null: false
     t.index ["ships_to_id"], name: "index_orders_on_ships_to_id"
   end
 
@@ -84,9 +86,21 @@ ActiveRecord::Schema[7.0].define(version: 2024_07_16_123200) do
     t.index ["name"], name: "index_products_on_name", unique: true
   end
 
+  create_table "returned_order_histories", force: :cascade do |t|
+    t.bigint "product_id", null: false
+    t.bigint "order_id", null: false
+    t.integer "quantity", default: 1, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["order_id"], name: "index_returned_order_histories_on_order_id"
+    t.index ["product_id"], name: "index_returned_order_histories_on_product_id"
+  end
+
   add_foreign_key "inventories", "orders"
   add_foreign_key "inventories", "products"
   add_foreign_key "inventory_status_changes", "employees", column: "actor_id"
   add_foreign_key "inventory_status_changes", "inventories"
   add_foreign_key "orders", "addresses", column: "ships_to_id"
+  add_foreign_key "returned_order_histories", "orders"
+  add_foreign_key "returned_order_histories", "products"
 end

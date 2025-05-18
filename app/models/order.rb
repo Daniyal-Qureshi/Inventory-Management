@@ -8,8 +8,8 @@ class Order < ApplicationRecord
   scope :fulfilled, -> { joins(:inventories).merge(Inventory.shipped).group('orders.id') }
   scope :returned, -> { joins(:inventories).merge(Inventory.returned).group('orders.id') }
   scope :not_fulfilled, -> { left_joins(:inventories).where(inventories: { order_id: nil }) }
-  scope :with_returned_items, -> { 
-    joins(:returned_order_histories).distinct 
+  scope :with_returned_items, lambda {
+    joins(:returned_order_histories).distinct
   }
   scope :with_address_issues, -> { with_returned_items.where(address_fixed: false) }
   scope :fulfillable, lambda {
@@ -36,8 +36,9 @@ class Order < ApplicationRecord
 
   def fulfilled?
     return false if inventories.empty?
-    inventories.each do |inventory| 
-      if inventory.status != "shipped"  
+
+    inventories.each do |inventory|
+      if inventory.status != 'shipped'
         return false
       end
     end
@@ -46,8 +47,9 @@ class Order < ApplicationRecord
 
   def returned?
     return false if inventories.empty?
-    inventories.each do |inventory| 
-      if inventory.status != "returned"  
+
+    inventories.each do |inventory|
+      if inventory.status != 'returned'
         return false
       end
     end
@@ -56,7 +58,7 @@ class Order < ApplicationRecord
   def fulfillable?
     line_items.all?(&:fulfillable?)
   end
-  
+
   def mark_address_as_fixed!
     update!(address_fixed: true)
   end

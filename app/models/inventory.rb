@@ -8,8 +8,8 @@ class Inventory < ApplicationRecord
   scope :on_shelf, -> { where(status: :on_shelf) }
   scope :returned, -> { where(status: :returned) }
   scope :shipped, -> { where(status: :shipped) }
-  scope :returned_by_product, ->(product_id) { returned.where(product_id: product_id) }
-  
+  scope :returned_by_product, ->(product_id) { returned.where(product_id:) }
+
   def self.returned_products
     returned_products = {}
     Inventory.returned.includes(:product).each do |inventory|

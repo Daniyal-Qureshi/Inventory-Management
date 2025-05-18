@@ -32,10 +32,10 @@ class ApplicationController < ActionController::Base
   end
 
   def require_warehouse_employee
-    redirect_to root_path, alert: "Access denied" unless current_user&.warehouse?
+    redirect_to root_path, alert: 'Access denied' unless current_user&.warehouse?
   end
 
   def require_customer_service_employee
-    redirect_to root_path, alert: "Access denied" unless current_user&.customer_service?
+    redirect_to root_path, alert: 'Access denied' unless current_user&.customer_service?
   end
 end

@@ -3,7 +3,7 @@ class Product < ApplicationRecord
   monetize :price_cents
   has_many :inventory
   has_many :returned_order_histories
-  
+
   def needed_inventory_count
     self.class.connection.select_value(<<~SQL)
       SELECT GREATEST(

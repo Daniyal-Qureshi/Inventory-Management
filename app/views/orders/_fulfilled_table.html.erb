@@ -1,10 +1,10 @@
 <table class='generic-table zebra'>
     <thead>
       <tr>
-        <th><%= t '.fulfilled' %></th>
-        <th><%= t '.order_id' %></th>
-        <th class='number'><%= t '.order_amount' %></th>
-        <th><%= t '.actions' %></th>
+        <th><%= t 'orders.table.fulfilled' %></th>
+        <th><%= t 'orders.table.order_id' %></th>
+        <th class='number'><%= t 'orders.table.order_amount' %></th>
+        <th><%= t 'orders.table.actions' %></th>
       </tr>
     </thead>
     <tbody>
@@ -30,13 +30,13 @@
               <%= humanized_money_with_symbol order.cost %>
             </div>
             <div class='metadata'>
-              <%= t '.product_count', count: order.line_items.sum(:quantity) %>
+              <%= t 'orders.table.product_count', count: order.line_items.sum(:quantity) %>
             </div>
           </td>
             <td>
               <% if order.fulfilled? %>
                 <%= button_to order_return_path(order), method: :post, class: 'bg-green-500 text-white px-2 py-1 rounded-md text-xs' do %>
-                  <%= t '.mark_as_returned' %>
+                  <%= t 'orders.table.mark_as_returned' %>
                 <% end %>
               <% end %>
             </td>

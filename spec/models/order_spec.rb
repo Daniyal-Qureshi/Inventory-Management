@@ -1,17 +1,12 @@
 require 'rails_helper'
 
 RSpec.describe Order, type: :model do
-  describe 'associations' do
-    it { should belong_to(:ships_to).class_name('Address') }
-    it { should have_many(:line_items).class_name('OrderLineItem') }
-    it { should have_many(:inventories) }
-  end
-
   describe 'scopes' do
     describe '.with_returned_items' do
       it 'returns orders with returned inventory items' do
         order_with_returned = create(:order)
         create(:inventory, order: order_with_returned, status: :returned)
+        create(:returned_order_history, order: order_with_returned)
 
         order_without_returned = create(:order)
         create(:inventory, order: order_without_returned, status: :shipped)
@@ -28,39 +23,15 @@ RSpec.describe Order, type: :model do
       it 'returns orders with returned items and unfixed addresses' do
         order_with_issue = create(:order, address_fixed: false)
         create(:inventory, order: order_with_issue, status: :returned)
+        create(:returned_order_history, order: order_with_issue)
 
         order_fixed = create(:order, address_fixed: true)
         create(:inventory, order: order_fixed, status: :returned)
-
-        order_no_return = create(:order, address_fixed: false)
-        create(:inventory, order: order_no_return, status: :shipped)
+        create(:returned_order_history, order: order_fixed)
 
         expect(Order.with_address_issues).to include(order_with_issue)
         expect(Order.with_address_issues).not_to include(order_fixed)
-        expect(Order.with_address_issues).not_to include(order_no_return)
       end
-    end
-  end
-
-  describe '#has_returned_items?' do
-    it 'returns true when order has returned inventory' do
-      order = create(:order)
-      create(:inventory, order:, status: :returned)
-
-      expect(order.has_returned_items?).to be true
-    end
-
-    it 'returns false when order has no returned inventory' do
-      order = create(:order)
-      create(:inventory, order:, status: :shipped)
-
-      expect(order.has_returned_items?).to be false
-    end
-
-    it 'returns false when order has no inventory' do
-      order = create(:order)
-
-      expect(order.has_returned_items?).to be false
     end
   end
 

@@ -9,6 +9,12 @@ FactoryBot.define do
     status { :on_shelf }
   end
 
+  factory :returned_order_history do
+    product
+    order
+    quantity { 1 }
+  end
+
   factory :order_line_item do
     product
     order

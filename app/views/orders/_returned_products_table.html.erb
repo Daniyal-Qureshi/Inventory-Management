@@ -4,9 +4,9 @@
     <table class='generic-table zebra'>
         <thead>
         <tr>
-            <th><%= t '.returned_products.table.product' %></th>
-            <th class='number'><%= t '.returned_products.table.quantity' %></th>
-            <th><%= t '.returned_products.table.actions' %></th>
+            <th><%= t 'employees.index.returned_products.table.product' %></th>
+            <th class='number'><%= t 'employees.index.returned_products.table.quantity' %></th>
+            <th><%= t 'employees.index.returned_products.table.actions' %></th>
         </tr>
         </thead>
         <tbody>
@@ -20,7 +20,7 @@
             </td>
             <td>
                 <%= button_to product_restock_path(product), method: :post, class: 'bg-blue-500 text-white px-2 py-1 rounded-md text-xs' do %>
-                <%= t '.returned_products.table.restock' %>
+                <%= t 'employees.index.returned_products.table.restock' %>
                 <% end %>
             </td>
             </tr>

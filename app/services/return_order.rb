@@ -1,6 +1,6 @@
 class ReturnOrder
   def self.run(employee, order)
-    new(employee: employee, order: order).run
+    new(employee:, order:).run
   end
 
   def initialize(employee:, order:)
@@ -15,15 +15,15 @@ class ReturnOrder
         return_inventory(inventory)
         @product_counts[inventory.product_id] += 1
       end
-      
+
       @product_counts.each do |product_id, quantity|
         ReturnedOrderHistory.create!(
-          order: order,
-          product_id: product_id,
-          quantity: quantity
+          order:,
+          product_id:,
+          quantity:
         )
       end
-    end    
+    end
     true
   end
 
@@ -34,7 +34,7 @@ class ReturnOrder
   def return_inventory(inventory)
     inventory.with_lock do
       InventoryStatusChange.create!(
-        inventory: inventory,
+        inventory:,
         status_from: inventory.status,
         status_to: :returned,
         actor: employee
@@ -42,4 +42,4 @@ class ReturnOrder
       inventory.update!(status: :returned)
     end
   end
-end 
+end

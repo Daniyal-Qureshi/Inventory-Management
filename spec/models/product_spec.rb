@@ -1,31 +1,28 @@
 require 'rails_helper'
 
 RSpec.describe Product do
-
-
-  describe "#update_on_shelf_counter" do
+  describe '#update_on_shelf_counter' do
     let(:product) { create(:product) }
 
     before do
-      create_list(:inventory, 2, product: product, status: :on_shelf)
-      create_list(:inventory, 3, product: product, status: :shipped)
+      create_list(:inventory, 2, product:, status: :on_shelf)
+      create_list(:inventory, 3, product:, status: :shipped)
     end
 
-    it "counts only on_shelf inventories" do
+    it 'counts only on_shelf inventories' do
       product.update_on_shelf_counter
       expect(product.reload.on_shelf).to eq(2)
     end
 
-    it "updates the counter correctly when inventories change" do
+    it 'updates the counter correctly when inventories change' do
       product.update_on_shelf_counter
       expect(product.on_shelf).to eq(2)
 
-      create(:inventory, product: product, status: :on_shelf)
+      create(:inventory, product:, status: :on_shelf)
       product.update_on_shelf_counter
       expect(product.reload.on_shelf).to eq(3)
     end
   end
-
 
   describe '#needed_inventory_count' do
     let(:product) { create(:product) }
@@ -63,10 +60,10 @@ RSpec.describe Product do
     it 'takes into account shipped units' do
       create(:order_line_item, order:, product:, quantity:)
       FindFulfillableOrder.fulfill_order(employee, order.id)
-      
+
       product.reload
       other_product.reload
-      
+
       create(:order_line_item, order: other_order, product:, quantity: 1)
       create(:order_line_item, order: other_order, product: other_product, quantity: quantity + 1)
       expect(product.needed_inventory_count).to eq(1)

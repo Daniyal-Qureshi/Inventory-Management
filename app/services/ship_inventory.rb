@@ -1,4 +1,3 @@
-require 'set'
 class ShipInventory
   def self.run(employee, inventory_items, order)
     new(employee:, inventory_items:, order:).run

@@ -3,9 +3,9 @@ RSpec.describe ReceiveProduct do
   let(:employee) { create(:employee) }
   let(:quantity) { 2 }
 
-  it "updates on_shelf counter after receiving" do
-    expect {
+  it 'updates on_shelf counter after receiving' do
+    expect do
       ReceiveProduct.run(employee, product, quantity)
-    }.to change { product.reload.on_shelf }.by(quantity)
+    end.to change { product.reload.on_shelf }.by(quantity)
   end
 end

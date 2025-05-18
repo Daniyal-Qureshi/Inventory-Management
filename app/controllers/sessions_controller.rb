@@ -4,12 +4,12 @@ class SessionsController < ApplicationController
 
   def create
     employee = Employee.find_by(access_code: access_code_param[:access_code])
-    
+
     if employee
       sign_in_as(employee)
       redirect_based_on_role(employee)
     else
-      redirect_to request.path, alert: "Invalid access code"
+      redirect_to request.path, alert: 'Invalid access code'
     end
   end
 
@@ -19,11 +19,11 @@ class SessionsController < ApplicationController
   end
 
   private
-  
+
   def access_code_param
     params.require(:session).permit(:access_code)
   end
-  
+
   def redirect_based_on_role(employee)
     if employee.customer_service?
       redirect_to customer_service_index_path

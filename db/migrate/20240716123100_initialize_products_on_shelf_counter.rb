@@ -4,8 +4,8 @@ class InitializeProductsOnShelfCounter < ActiveRecord::Migration[7.0]
     execute <<-SQL
       UPDATE products
       SET on_shelf = COALESCE((
-        SELECT quantity 
-        FROM product_on_shelf_quantities 
+        SELECT quantity#{' '}
+        FROM product_on_shelf_quantities#{' '}
         WHERE product_on_shelf_quantities.product_id = products.id
       ), 0)
     SQL
@@ -13,6 +13,6 @@ class InitializeProductsOnShelfCounter < ActiveRecord::Migration[7.0]
 
   def down
     # Reset all counters to 0
-    execute("UPDATE products SET on_shelf = 0")
+    execute('UPDATE products SET on_shelf = 0')
   end
-end 
+end

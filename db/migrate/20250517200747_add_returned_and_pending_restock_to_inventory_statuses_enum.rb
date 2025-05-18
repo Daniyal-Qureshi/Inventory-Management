@@ -6,6 +6,6 @@ class AddReturnedAndPendingRestockToInventoryStatusesEnum < ActiveRecord::Migrat
   end
 
   def down
-    puts "Warning: Cannot remove values from an enum type in PostgreSQL"
+    puts 'Warning: Cannot remove values from an enum type in PostgreSQL'
   end
 end

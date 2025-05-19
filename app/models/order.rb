@@ -6,7 +6,6 @@ class Order < ApplicationRecord
 
   scope :recent, -> { order(created_at: :desc) }
   scope :fulfilled, -> { joins(:inventories).merge(Inventory.shipped).group('orders.id') }
-  scope :returned, -> { joins(:inventories).merge(Inventory.returned).group('orders.id') }
   scope :not_fulfilled, -> { left_joins(:inventories).where(inventories: { order_id: nil }) }
   scope :with_returned_items, lambda {
     joins(:returned_order_histories).distinct
@@ -46,14 +45,14 @@ class Order < ApplicationRecord
   end
 
   def returned?
-    return false if inventories.empty?
-
-    inventories.each do |inventory|
-      if inventory.status != 'returned'
-        return false
-      end
-    end
+    ReturnedOrderHistory.exists?(order_id: id)
   end
+
+  # bug: An order which has already been fulfilled or returned is being considered as fulfillable.
+  # it can be fixed as follow:
+  #   def fulfillable?
+  #     !fulfilled? && !returned? && line_items.all?(&:fulfillable?)
+  #   end
 
   def fulfillable?
     line_items.all?(&:fulfillable?)

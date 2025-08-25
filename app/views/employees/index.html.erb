@@ -1,0 +1,75 @@
+<%= employee_breadcrumb %>
+
+<p class='employees__welcome text-xl font-light pb-4'><%= t '.welcome', name: current_user.name %></p>
+<div class='flex flex-wrap md:-mx-2 lg:-mx-2'>
+  <div class='mb-4 md:px-2 lg:px-2 w-full md:w-1/2 lg:w-1/2'>
+    <div class='bg-white rounded-md shadow-md border overflow-hidden'>
+      <h3 class='text-2xl font-bold px-4 py-2'><%= t 'employees.index.receive_product.header' %></h3>
+      <table class='generic-table zebra'>
+        <thead>
+          <tr>
+            <th><%= t 'employees.index.receive_product.table.product' %></th>
+            <th class='number'><%= t 'employees.index.receive_product.table.quantity' %></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @products.each do |product| %>
+            <tr data-id='product-<%= product.id %>'>
+              <td>
+                <%= product.name %>
+                <div class='metadata'>
+                  <%= t 'employees.index.receive_product.table.on_shelf', count: product.on_shelf %>
+                </div>
+                <div class='metadata'>
+                  <%= t 'employees.index.receive_product.table.needed', count: product.needed_inventory_count %>
+                </div>
+              </td>
+              <td class='number'>
+                <%= form_for :receive_product, url: product_receive_path(product) do |form| %>
+                  <%= form.label :quantity, class: 'hidden' %>
+                  <%= form.number_field :quantity, min: 1, required: true, class: 'w-24 border p-1 text-right rounded-sm' %>
+                  <%= form.submit class: 'bg-teal-600 text-white p-1 px-3 ml-2' %>
+                <% end %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  
+  <% if @returned_products.any? %>
+    <%= render 'orders/returned_products_table' %>
+  <% end %>
+  
+  <% if @fulfillable_orders.any? %>
+    <div class='mb-4 md:px-2 lg:px-2 w-full md:w-1/2 lg:w-1/2'>
+      <div class='bg-white rounded-md shadow-md border overflow-hidden'>
+        <h3 class='text-2xl font-bold px-4 py-2'><%= t '.fulfillable_orders.header' %></h3>
+        <%= render 'orders/table', orders: @fulfillable_orders %>
+      </div>
+    </div>
+  <% end %>
+  <div class='mb-4 md:px-2 lg:px-2 w-full md:w-1/2 lg:w-1/2'>
+    <div class='bg-white rounded-md shadow-md border overflow-hidden'>
+      <h3 class='text-2xl font-bold px-4 py-2'><%= t '.recent_orders.header' %></h3>
+      <%= render 'orders/table', orders: @recent_orders %>
+    </div>
+  </div>
+  <% if @fulfilled_orders.any? %>
+    <div class='mb-4 md:px-2 lg:px-2 w-full md:w-1/2 lg:w-1/2'>
+      <div class='bg-white rounded-md shadow-md border overflow-hidden'>
+        <h3 class='text-2xl font-bold px-4 py-2'><%= t '.fulfilled_orders.header' %></h3>
+        <%= render 'orders/fulfilled_table', orders: @fulfilled_orders %>
+      </div>
+    </div>
+  <% end %>
+  <% if @returned_orders.any? %>
+    <div class='mb-4 md:px-2 lg:px-2 w-full md:w-1/2 lg:w-1/2'>
+      <div class='bg-white rounded-md shadow-md border overflow-hidden'>
+        <h3 class='text-2xl font-bold px-4 py-2'><%= t '.returned_orders.header' %></h3>
+        <%= render 'orders/returned_table', orders: @returned_orders %>
+      </div>
+    </div>
+  <% end %>
+</div>

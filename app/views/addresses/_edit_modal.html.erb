@@ -1,0 +1,70 @@
+<div id="address-edit-modal-<%= order.id %>" class="fixed inset-0 bg-gray-500 bg-opacity-75 flex items-center justify-center hidden z-50" aria-modal="true" role="dialog">
+  <div class="bg-white rounded-lg overflow-hidden shadow-xl transform transition-all sm:max-w-lg sm:w-full">
+    <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+      <div class="sm:flex sm:items-start">
+        <div class="mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-blue-100 sm:mx-0 sm:h-10 sm:w-10">
+          <svg class="h-6 w-6 text-blue-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+          </svg>
+        </div>
+        <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left w-full">
+          <h3 class="text-lg leading-6 font-medium text-gray-900" id="modal-title">
+            <%= t 'addresses.edit_modal.update_address' %>
+          </h3>
+          <div class="mt-2">
+            <% if order.address_fixed? %>
+              <div class="rounded-md bg-green-50 p-4 mb-4">
+                <div class="flex">
+                  <div class="flex-shrink-0">
+                    <svg class="h-5 w-5 text-green-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                      <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                    </svg>
+                  </div>
+                  <div class="ml-3">
+                    <p class="text-sm font-medium text-green-800"><%= t 'addresses.edit_modal.address_already_fixed' %></p>
+                  </div>
+                </div>
+              </div>
+            <% end %>
+            
+            <%= form_with url: order_address_path(order), method: :patch, local: true, class: "space-y-4" do |form| %>
+              <div>
+                <%= form.label :street_1, t('addresses.edit_modal.street_1'), class: "block text-sm font-medium text-gray-700" %>
+                <%= form.text_field :street_1, value: order.ships_to.street_1, class: "mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" %>
+              </div>
+              
+              <div>
+                <%= form.label :street_2, t('addresses.edit_modal.street_2'), class: "block text-sm font-medium text-gray-700" %>
+                <%= form.text_field :street_2, value: order.ships_to.street_2, class: "mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" %>
+              </div>
+              
+              <div class="grid grid-cols-3 gap-4">
+                <div>
+                  <%= form.label :city, t('addresses.edit_modal.city'), class: "block text-sm font-medium text-gray-700" %>
+                  <%= form.text_field :city, value: order.ships_to.city, class: "mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" %>
+                </div>
+                
+                <div>
+                  <%= form.label :state, t('addresses.edit_modal.state'), class: "block text-sm font-medium text-gray-700" %>
+                  <%= form.text_field :state, value: order.ships_to.state, class: "mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" %>
+                </div>
+                
+                <div>
+                  <%= form.label :zip, t('addresses.edit_modal.zip'), class: "block text-sm font-medium text-gray-700" %>
+                  <%= form.text_field :zip, value: order.ships_to.zip, class: "mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" %>
+                </div>
+              </div>
+              
+              <div class="mt-5 sm:mt-4 sm:flex sm:flex-row-reverse">
+                <%= form.submit t('addresses.edit_modal.update_and_mark_fixed'), class: "w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-blue-600 text-base font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 sm:ml-3 sm:w-auto sm:text-sm" %>
+                <button type="button" class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:w-auto sm:text-sm close-modal" data-modal-id="address-edit-modal-<%= order.id %>">
+                  <%= t 'addresses.edit_modal.cancel' %>
+                </button>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> 

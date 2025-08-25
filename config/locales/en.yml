@@ -1,33 +1,104 @@
-# Files in the config/locales directory are used for internationalization
-# and are automatically loaded by Rails. If you want to use locales other
-# than English, add the necessary files in this directory.
-#
-# To use the locales, use `I18n.t`:
-#
-#     I18n.t 'hello'
-#
-# In views, this is aliased to just `t`:
-#
-#     <%= t('hello') %>
-#
-# To use a different locale, set it with `I18n.locale`:
-#
-#     I18n.locale = :es
-#
-# This would use the information in config/locales/es.yml.
-#
-# The following keys must be escaped otherwise they will not be retrieved by
-# the default I18n backend:
-#
-# true, false, on, off, yes, no
-#
-# Instead, surround them with single quotes.
-#
-# en:
-#   'true': 'foo'
-#
-# To learn more, please read the Rails Internationalization guide
-# available at https://guides.rubyonrails.org/i18n.html.
-
+---
 en:
-  hello: "Hello world"
+  addresses:
+    edit_modal:
+      address_already_fixed: This address has already been marked as fixed
+      cancel: Cancel
+      city: City
+      state: State
+      street_1: Street Address
+      street_2: Street Address (line 2)
+      update_address: Update Shipping Address
+      update_and_mark_fixed: Update and Mark as Fixed
+      zip: ZIP Code
+  customer_service:
+    index:
+      address_fixed: Address Fixed
+      edit_and_mark_fixed: Edit and Mark as Fixed
+  employees:
+    index:
+      fulfillable_orders:
+        header: Fulfillable Orders
+      fulfilled_orders:
+        header: Fulfilled Orders
+      receive_product:
+        header: Receive New Product
+        table:
+          needed: "%{count} needed"
+          on_shelf: "%{count} on shelf"
+          product: Product
+          quantity: Receive Quantity
+      recent_orders:
+        header: Recent Orders
+      returned_orders:
+        header: Returned Orders
+      returned_products:
+        header: Returned Products
+        table:
+          actions: Actions
+          product: Product
+          quantity: Returned Quantity
+          restock: Restock
+      title: Employee Portal
+      welcome: Welcome, %{name}
+  helpers:
+    label:
+      receive_product:
+        quantity: Quantity
+      session:
+        access_code: Enter your access code
+    submit:
+      receive_product:
+        submit: Receive
+      session:
+        submit: Sign in
+  layouts:
+    application:
+      customer_portal: Customer Service Portal
+      page_title: Inventory Management
+      portal: Portal
+      sign_in: Sign in
+      sign_out: Sign out
+  order:
+    fulfillable: Fulfillable
+    fulfilled: Fulfilled
+    returned: Returned
+    unfulfillable: Unfulfillable
+  orders:
+    show:
+      fulfill_order: Fulfill order
+      order:
+        fulfilled: Order has been fulfilled
+        header: 'Order ID #%{id}'
+        returned: Order has been returned
+      product_table:
+        on_shelf: "%{count} on shelf"
+        order_total: Order total
+        thead:
+          cost: Cost
+          name: Product Name
+          quantity: Quantity
+      products:
+        header: Line Items
+      ships_to:
+        header: Ships To
+    table:
+      actions: Actions
+      fulfilled: Status
+      mark_as_returned: Mark as Returned
+      order_amount: Amount
+      order_id: Order ID
+      order_id_value: 'Order #%{id}'
+      product_count:
+        one: 1 product
+        other: "%{count} products"
+  products:
+    index:
+      quantity:
+        one: Only 1 left in stock
+        other: "%{count} in stock"
+        zero: Out of stock
+      title: Products
+  returns:
+    show:
+      back_to_orders: Back to Orders
